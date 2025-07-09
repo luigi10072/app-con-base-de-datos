@@ -3,8 +3,8 @@ FROM debian:bookworm-slim
 
 # Instala Nginx, PHP y PHP-FPM
 # También instala las extensiones PHP necesarias (pdo_mysql)
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
         nginx \
         php8.2-fpm \
         php8.2-mysql \
@@ -15,7 +15,8 @@ RUN apt-get update \
         php8.2-mbstring \
         php8.2-xml \
         php8.2-zip \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* && \
+    apt-get clean # Agregado para limpiar el cache de apt inmediatamente
 
 # Copia los archivos de tu aplicación al directorio de trabajo de Nginx
 # El directorio /var/www/html es el DocumentRoot por defecto de Nginx
