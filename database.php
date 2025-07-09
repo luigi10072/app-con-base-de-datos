@@ -20,7 +20,7 @@ function conectarDB() {
         $pdo = new PDO($dsn, $user, $pass, $options);
         return $pdo;
     } catch (PDOException $e) {
-        error_log("Database connection error: " . $e->getMessage())
+        error_log("Database connection error: " . $e->getMessage());
         throw new Exception("Error al conectar con la base de datos. Por favor, inténtelo de nuevo más tarde.");
     }
 }
