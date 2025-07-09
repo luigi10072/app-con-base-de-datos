@@ -59,7 +59,7 @@ services:
   # --- Servicio de Base de Datos MySQL ---
   - type: database # Define que este es un servicio de base de datos
     name: pokemon-db # Nombre de tu servicio de base de datos en Render (usado en fromDatabase arriba)
-    databaseName: pokemon_database # El nombre real de la base de datos dentro de MySQL (ej. 'pokemon' o 'mi_db')
+    databaseName: pokemon # El nombre real de la base de datos dentro de MySQL (ej. 'pokemon' o 'mi_db')
     engine: MySQL # Tipo de motor de base de datos
     version: "8.0" # Versión de MySQL
     plan: starter # Plan de base de datos (starter es gratuito/básico)
