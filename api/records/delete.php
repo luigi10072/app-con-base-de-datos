@@ -5,9 +5,6 @@ require_once('../../database.php');
 // Ajusta esta ruta si es necesario. Desde 'api/records/' sube un nivel para 'auth_middleware.php' en 'api/'.
 require_once('../auth_middleware.php');
 
-// Habilitar el reporte de errores de MySQLi para una depuración más fácil
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
 // Manejar la solicitud OPTIONS (preflight CORS)
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
