@@ -19,13 +19,12 @@ services:
     # Debe coincidir con el CMD de tu Dockerfile.
     startCommand: service php8.2-fpm start && nginx -g "daemon off;"
 
-    # El puerto que tu aplicación expone (debe coincidir con EXPOSE en tu Dockerfile y listen en nginx-app.conf)
-    port: 8080 
+    # El puerto que tu aplicación expone (DEBE COINCIDIR CON EXPOSE EN DOCKERFILE Y LISTEN EN NGINX-APP.CONF)
+    port: 8080 # Asegúrate de que este puerto sea 8080
 
     # Variables de entorno para tu aplicación
-    # Estas variables se añadirán manualmente después de crear la base de datos en Render.
     envVars:
-      # Deja estas líneas comentadas o elimínalas por ahora si vas a añadirlas manualmente en el dashboard.
+      # Estas variables se añadirán manualmente después de crear la base de datos en Render.
       # Si las dejas, asegúrate de que los valores coincidan con los de tu DB de Render.
       # - key: MYSQL_HOST
       #   value: "tu_host_mysql_de_render" 
@@ -51,3 +50,4 @@ services:
     # Opcional: Configuración de escalado o salud
     # healthCheckPath: /index.html # O una ruta de tu API que devuelva 200 OK
     # autoDeploy: true # Despliegue automático en cada push a la rama configurada
+
