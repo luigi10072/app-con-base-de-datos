@@ -1,5 +1,5 @@
 # render.yaml
-# Este archivo define los servicios para tu aplicación en Render.
+# Este archivo define solo el servicio web para tu aplicación en Render.
 
 services:
   # --- Servicio Web para tu aplicación PHP ---
@@ -23,24 +23,20 @@ services:
     port: 8080 
 
     # Variables de entorno para tu aplicación
+    # Estas variables se añadirán manualmente después de crear la base de datos en Render.
     envVars:
-      # Estas variables se inyectarán automáticamente desde el servicio de base de datos
-      # Asegúrate de que el 'fromDatabase' apunte al 'name' de tu servicio de base de datos
-      - key: MYSQL_HOST
-        fromDatabase: pokemon-db # Nombre del servicio de base de datos en este mismo blueprint
-        property: host
-      - key: MYSQL_DATABASE
-        fromDatabase: pokemon-db
-        property: database
-      - key: MYSQL_USER
-        fromDatabase: pokemon-db
-        property: user
-      - key: MYSQL_PASSWORD
-        fromDatabase: pokemon-db
-        property: password
-      - key: MYSQL_PORT
-        fromDatabase: pokemon-db
-        property: port
+      # Deja estas líneas comentadas o elimínalas por ahora si vas a añadirlas manualmente en el dashboard.
+      # Si las dejas, asegúrate de que los valores coincidan con los de tu DB de Render.
+      # - key: MYSQL_HOST
+      #   value: "tu_host_mysql_de_render" 
+      # - key: MYSQL_DATABASE
+      #   value: "tu_nombre_db_de_render"
+      # - key: MYSQL_USER
+      #   value: "tu_usuario_db_de_render"
+      # - key: MYSQL_PASSWORD
+      #   value: "tu_password_db_de_render"
+      # - key: MYSQL_PORT
+      #   value: "3306" # O el puerto que Render te dé para MySQL
       
       # Opcional: Configuración de depuración para PHP (si no la pones en php.ini)
       # - key: PHP_DISPLAY_ERRORS
@@ -55,14 +51,3 @@ services:
     # Opcional: Configuración de escalado o salud
     # healthCheckPath: /index.html # O una ruta de tu API que devuelva 200 OK
     # autoDeploy: true # Despliegue automático en cada push a la rama configurada
-
-  # --- Servicio de Base de Datos MySQL ---
-  - type: database # Define que este es un servicio de base de datos
-    name: pokemon-db # Nombre de tu servicio de base de datos en Render (usado en fromDatabase arriba)
-    databaseName: pokemon # El nombre real de la base de datos dentro de MySQL (ej. 'pokemon' o 'mi_db')
-    engine: MySQL # Tipo de motor de base de datos
-    version: "8.0" # Versión de MySQL
-    plan: starter # Plan de base de datos (starter es gratuito/básico)
-    # ipAllowlist: # Opcional: lista de IPs permitidas para acceder a la DB (por defecto permite a la app)
-    #   - source: 0.0.0.0/0 # ¡Permite todas las IPs, usar con precaución en producción!
-    #     description: "Allow all IPs"
