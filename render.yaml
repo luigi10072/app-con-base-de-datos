@@ -1,0 +1,68 @@
+# render.yaml
+# Este archivo define los servicios para tu aplicación en Render.
+
+services:
+  # --- Servicio Web para tu aplicación PHP ---
+  - type: web # Define que este es un servicio web
+    name: pokemon-app # Nombre de tu servicio web en Render
+    env: docker # Indica a Render que use tu Dockerfile para construir la imagen
+    
+    # La ruta a tu repositorio Git. Render lo detectará automáticamente si lo conectas.
+    # repo: https://github.com/tu-usuario/tu-repositorio.git 
+    # branch: main # La rama de tu repositorio a desplegar
+
+    # El comando de construcción que Render ejecutará.
+    # Si tienes un Dockerfile en la raíz, Render lo detectará automáticamente.
+    # buildCommand: docker build -t pokemon-app . 
+
+    # El comando de inicio que Render ejecutará para levantar tu aplicación.
+    # Debe coincidir con el CMD de tu Dockerfile.
+    startCommand: service php8.2-fpm start && nginx -g "daemon off;"
+
+    # El puerto que tu aplicación expone (debe coincidir con EXPOSE en tu Dockerfile y listen en nginx-app.conf)
+    port: 8080 
+
+    # Variables de entorno para tu aplicación
+    envVars:
+      # Estas variables se inyectarán automáticamente desde el servicio de base de datos
+      # Asegúrate de que el 'fromDatabase' apunte al 'name' de tu servicio de base de datos
+      - key: MYSQL_HOST
+        fromDatabase: pokemon-db # Nombre del servicio de base de datos en este mismo blueprint
+        property: host
+      - key: MYSQL_DATABASE
+        fromDatabase: pokemon-db
+        property: database
+      - key: MYSQL_USER
+        fromDatabase: pokemon-db
+        property: user
+      - key: MYSQL_PASSWORD
+        fromDatabase: pokemon-db
+        property: password
+      - key: MYSQL_PORT
+        fromDatabase: pokemon-db
+        property: port
+      
+      # Opcional: Configuración de depuración para PHP (si no la pones en php.ini)
+      # - key: PHP_DISPLAY_ERRORS
+      #   value: "On"
+      # - key: PHP_ERROR_REPORTING
+      #   value: "E_ALL"
+      # - key: PHP_LOG_ERRORS
+      #   value: "On"
+      # - key: PHP_ERROR_LOG
+      #   value: "/dev/stderr" # Para que los errores aparezcan en los logs de Render
+
+    # Opcional: Configuración de escalado o salud
+    # healthCheckPath: /index.html # O una ruta de tu API que devuelva 200 OK
+    # autoDeploy: true # Despliegue automático en cada push a la rama configurada
+
+  # --- Servicio de Base de Datos MySQL ---
+  - type: database # Define que este es un servicio de base de datos
+    name: pokemon-db # Nombre de tu servicio de base de datos en Render (usado en fromDatabase arriba)
+    databaseName: pokemon_database # El nombre real de la base de datos dentro de MySQL (ej. 'pokemon' o 'mi_db')
+    engine: MySQL # Tipo de motor de base de datos
+    version: "8.0" # Versión de MySQL
+    plan: starter # Plan de base de datos (starter es gratuito/básico)
+    # ipAllowlist: # Opcional: lista de IPs permitidas para acceder a la DB (por defecto permite a la app)
+    #   - source: 0.0.0.0/0 # ¡Permite todas las IPs, usar con precaución en producción!
+    #     description: "Allow all IPs"
