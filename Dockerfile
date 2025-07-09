@@ -59,7 +59,7 @@ RUN envsubst '$PORT' < /etc/nginx/sites-available/default > /etc/nginx/sites-ava
 
 # Expone el puerto 8080 (donde Nginx escuchará)
 # Nota: Render inyectará la variable PORT, y Nginx escuchará en ella.
-# EXPOSE 8080 # Esta línea es menos crítica si Nginx escucha en $PORT
+EXPOSE 8080 # Esta línea es crucial para que Render detecte el puerto
 
 # Comando para iniciar Nginx y PHP-FPM en primer plano
 # Esto asegura que ambos servicios se ejecuten y que los logs se capturen.
