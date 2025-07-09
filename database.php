@@ -1,11 +1,11 @@
 <?php
 // database.php
 function conectarDB() {
-    $host = getenv('MYSQL_HOST') ?: 'mysql.railway.internal'; // O la IP de tu servidor de base de datos
-    $port = getenv('MYSQL_PORT') ?: '3306'
+    $host = getenv('MYSQLHOST') ?: 'mysql.railway.internal'; // O la IP de tu servidor de base de datos
+    $port = getenv('MYSQLPORT') ?: '3306'
     $db = getenv('MYSQL_DATABASE') ?: 'pokemon';     // El nombre de la base de datos que creaste
-    $user = getenv('MYSQL_USER') ?: 'root';      // Tu usuario de MySQL
-    $pass = getenv('MYSQL_PASSWORD') ?: 'IwSjZUqVxDIceOLuBBaPKzUPvfoCHlQv';          // Tu contraseña de MySQL (vacía si no tienes)
+    $user = getenv('MYSQLUSER') ?: 'root';      // Tu usuario de MySQL
+    $pass = getenv('MYSQLPASSWORD') ?: 'IwSjZUqVxDIceOLuBBaPKzUPvfoCHlQv';          // Tu contraseña de MySQL (vacía si no tienes)
     
     $charset = 'utf8mb4';
 
