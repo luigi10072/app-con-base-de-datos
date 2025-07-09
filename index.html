@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabla de Pokemons</title>
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/trontastic/jquery-ui.css">
+</head>
+<body>
+
+    <!-- Contenido para usuarios logueados -->
+    <div id="content" style="display:none;">
+        <h1>Tabla de Pokemons</h1>
+
+        <button id="logoutBtn" class="ui-button ui-corner-all ui-widget" style="float: right;">Cerrar Sesión</button>
+        <!-- El botón de añadir se ha movido más abajo -->
+
+        <label for="buscar">Buscar:</label>
+        <input type="text" id="buscar" placeholder="Filtrar resultados por nombre...">
+
+        <label for="registrosPagina">Mostrar:</label>
+        <select id="registrosPagina">
+            <option value="5">5</option>
+            <option value="10" selected>10</option>
+            <option value="20">20</option>
+        </select> registros
+
+        <div id="totalRegistros"></div>
+
+        <table id="tabla" class="ui-widget ui-widget-content">
+            <thead class="ui-widget-header">
+                <tr>
+                    <th data-campo="numero">N.º Pokédex</th>
+                    <th data-campo="especie">Especie</th>
+                    <th data-campo="HP">HP</th>
+                    <th data-campo="attack">Ataque</th>
+                    <th data-campo="defense">Defensa</th>
+                    <th data-campo="spattack">Atq. Esp.</th>
+                    <th data-campo="spdefense">Def. Esp.</th>
+                    <th data-campo="speed">Velocidad</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <div id="paginacion"></div>
+
+        <!-- BOTÓN AÑADIR AHORA ESTÁ AQUÍ, DEBAJO DE LA TABLA Y LA PAGINACIÓN -->
+        <button id="addRecordBtn" class="ui-button ui-corner-all ui-widget">Añadir Nuevo Pokémon</button>
+    </div>
+
+    <!-- Formulario de Login -->
+    <div id="loginForm" class="ui-widget ui-widget-content ui-corner-all" style="width: 300px; margin: 50px auto; padding: 20px; display: none;">
+        <h2>Iniciar Sesión</h2>
+        <form>
+            <p>
+                <label for="username">Usuario:</label>
+                <input type="text" id="username" class="ui-widget-content ui-corner-all" style="width: 95%;">
+            </p>
+            <p>
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" class="ui-widget-content ui-corner-all" style="width: 95%;">
+            </p>
+            <p id="loginMessage" style="color: red;"></p>
+            <button type="submit" class="ui-button ui-corner-all ui-widget">Entrar</button>
+        </form>
+    </div>
+
+    <!-- Diálogo para añadir/editar registro -->
+    <div id="recordDialog" title="Detalles del Pokémon" style="display:none;">
+        <form>
+            <label for="dialogIDpoke">N.º Pokédex:</label>
+            <input type="text" id="dialogIDpoke" readonly><br><br>
+
+            <label for="dialogPokename">Especie:</label>
+            <input type="text" id="dialogPokename"><br><br>
+
+            <label for="dialogHP">HP:</label>
+            <input type="number" id="dialogHP"><br><br>
+
+            <label for="dialogAttack">Ataque:</label>
+            <input type="number" id="dialogAttack"><br><br>
+
+            <label for="dialogDefense">Defensa:</label>
+            <input type="number" id="dialogDefense"><br><br>
+
+            <label for="dialogSpattack">Atq. Esp.:</label>
+            <input type="number" id="dialogSpattack"><br><br>
+
+            <label for="dialogSpdefense">Def. Esp.:</label>
+            <input type="number" id="dialogSpdefense"><br><br>
+
+            <label for="dialogSpeed">Velocidad:</label>
+            <input type="number" id="dialogSpeed"><br><br>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
