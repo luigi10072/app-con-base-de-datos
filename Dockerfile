@@ -3,7 +3,8 @@ FROM debian:bookworm-slim
 
 # Instala Nginx, PHP y PHP-FPM
 # También instala las extensiones PHP necesarias (pdo_mysql)
-RUN apt-get update && \
+RUN apt-get update --fix-missing && \
+    apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
         nginx \
         php8.2-fpm \
@@ -46,7 +47,7 @@ COPY php.ini /etc/php/8.2/cli/conf.d/99-custom.ini
 RUN rm /etc/nginx/sites-enabled/default
 
 # Copia tu configuración personalizada de Nginx
-COPY nginx.conf /etc/nginx/sites-available/default
+COPY nginx-app.conf /etc/nginx/sites-available/default
 RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 # Expone el puerto 8080 (donde Nginx escuchará)
