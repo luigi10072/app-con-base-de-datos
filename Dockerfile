@@ -9,11 +9,16 @@ FROM php:8.2-apache
 COPY . /var/www/html/
 
 # Configura las extensiones PHP necesarias
-# PDO MySQL es crucial para tu aplicación
 RUN docker-php-ext-install pdo_mysql
 
-# Opcional: Configuración de PHP para mostrar errores (solo para desarrollo, deshabilitar en producción)
-# COPY php.ini /usr/local/etc/php/conf.d/php.ini
+# Copia la configuración de PHP para mostrar errores en stderr
+COPY php.ini /usr/local/etc/php/conf.d/php.ini
+
+# Opcional: Configuración de Apache para suprimir la advertencia de ServerName
+# Crea un archivo de configuración de Apache personalizado
+RUN echo "ServerName localhost" > /etc/apache2/conf-available/servername.conf
+# Habilita esta configuración
+RUN a2enconf servername
 
 # Exponer el puerto 80 (Apache escucha en este puerto)
 EXPOSE 80
